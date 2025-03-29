@@ -1,0 +1,22 @@
+services:
+  mongo:
+    image: mongo:4.4.6
+    container_name: mongo
+    environment:
+      - MONGODB_URI=mongodb://localhost:27017
+      - MONGODB_DATABASE=app_db
+    ports:
+      - "27017:27017"
+    restart: always
+    volumes:
+      - mongo_data:/data/db
+
+  redis:
+    image: redis:7.4.1
+    container_name: redis
+    ports:
+      - "6379:6379"
+    restart: always
+
+volumes:
+  mongo_data:
