@@ -20,7 +20,7 @@ func NewEventBus(logger *logrus.Logger) *EventBus {
 }
 
 // Subscribe subscribes to a topic with a handler function
-func (eb *EventBus) Subscribe(topic string, handler interface{}) error {
+func (eb *EventBus) Subscribe(topic string, handler any) error {
 	err := eb.bus.Subscribe(topic, handler)
 	if err != nil {
 		eb.logger.WithFields(logrus.Fields{
@@ -34,7 +34,7 @@ func (eb *EventBus) Subscribe(topic string, handler interface{}) error {
 }
 
 // SubscribeAsync subscribes to a topic with an asynchronous handler
-func (eb *EventBus) SubscribeAsync(topic string, handler interface{}, transactional bool) error {
+func (eb *EventBus) SubscribeAsync(topic string, handler any, transactional bool) error {
 	err := eb.bus.SubscribeAsync(topic, handler, transactional)
 	if err != nil {
 		eb.logger.WithFields(logrus.Fields{
@@ -48,14 +48,14 @@ func (eb *EventBus) SubscribeAsync(topic string, handler interface{}, transactio
 }
 
 // Publish publishes an event to a topic
-func (eb *EventBus) Publish(topic string, args ...interface{}) error {
+func (eb *EventBus) Publish(topic string, args ...any) error {
 	eb.bus.Publish(topic, args...)
 	eb.logger.WithField("topic", topic).Debug("Published to topic")
 	return nil
 }
 
 // Unsubscribe unsubscribes from a topic
-func (eb *EventBus) Unsubscribe(topic string, handler interface{}) error {
+func (eb *EventBus) Unsubscribe(topic string, handler any) error {
 	err := eb.bus.Unsubscribe(topic, handler)
 	if err != nil {
 		eb.logger.WithFields(logrus.Fields{

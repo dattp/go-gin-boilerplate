@@ -3,9 +3,10 @@ package controller
 import (
 	"net/http"
 
-	"github.com/gin-gonic/gin"
 	"go-gin-boilerplate/internal/app/api/binding"
 	"go-gin-boilerplate/internal/service"
+
+	"github.com/gin-gonic/gin"
 )
 
 type HealthController struct {
@@ -34,4 +35,4 @@ func (c *HealthController) Check(ctx *gin.Context) {
 		Timestamp: status["timestamp"].(int64),
 	}
 	ctx.JSON(http.StatusOK, response)
-} 
+}

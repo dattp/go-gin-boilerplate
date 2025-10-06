@@ -5,9 +5,10 @@ import (
 	"fmt"
 	"time"
 
+	"go-gin-boilerplate/internal/config"
+
 	"github.com/redis/go-redis/v9"
 	"github.com/sirupsen/logrus"
-	"go-gin-boilerplate/internal/config"
 )
 
 // RedisClient wraps the Redis client
@@ -52,4 +53,4 @@ func (r *RedisClient) Close() error {
 // GetRedisClient returns the underlying Redis client
 func (r *RedisClient) GetRedisClient() *redis.Client {
 	return r.client
-} 
+}
