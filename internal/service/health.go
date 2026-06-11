@@ -3,13 +3,14 @@ package service
 import (
 	"time"
 
-	"github.com/sirupsen/logrus"
 	"go-gin-boilerplate/internal/eventbus"
+
+	"github.com/sirupsen/logrus"
 )
 
 // HealthService handles health check related operations
 type HealthService interface {
-	Check() map[string]interface{}
+	Check() map[string]any
 }
 
 type healthService struct {
@@ -31,11 +32,11 @@ func NewHealthService(logger *logrus.Logger, eventBus *eventbus.EventBus) Health
 	return service
 }
 
-func (s *healthService) Check() map[string]interface{} {
+func (s *healthService) Check() map[string]any {
 	// Publish health check event
 	s.eventBus.Publish("health:check", time.Now())
 
-	return map[string]interface{}{
+	return map[string]any{
 		"status":    "ok",
 		"uptime":    time.Since(s.startTime).String(),
 		"timestamp": time.Now().Unix(),
@@ -44,4 +45,4 @@ func (s *healthService) Check() map[string]interface{} {
 
 func (s *healthService) handleHealthCheckEvent(timestamp time.Time) {
 	s.logger.WithField("timestamp", timestamp).Info("Health check event received")
-} 
+}
