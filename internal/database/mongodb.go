@@ -5,10 +5,11 @@ import (
 	"fmt"
 	"time"
 
+	"go-gin-boilerplate/internal/config"
+
 	"github.com/sirupsen/logrus"
 	"go.mongodb.org/mongo-driver/mongo"
 	"go.mongodb.org/mongo-driver/mongo/options"
-	"go-gin-boilerplate/internal/config"
 )
 
 // MongoDBClient wraps the MongoDB client
@@ -55,4 +56,4 @@ func (m *MongoDBClient) Close() error {
 // GetMongoDBClient returns the underlying MongoDB client
 func (m *MongoDBClient) GetMongoDBClient() *mongo.Client {
 	return m.client
-} 
+}
